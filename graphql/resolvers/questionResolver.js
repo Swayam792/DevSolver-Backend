@@ -135,8 +135,7 @@ const QuestionResolver = {
                 if(question.author.toString() !== user._id.toString() && user.role !== 'ADMIN'){
                     throw new GraphQLError('You are not authorized to delete this question.');
                 } 
-                user.questions = user.questions.filter((q) => q.quesId.toString() !== quesId);
-                await user.save();
+
                 await QuestionModel.findByIdAndDelete(quesId);
                 return question._id;
             }catch(err){

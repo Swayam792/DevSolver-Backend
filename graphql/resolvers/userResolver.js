@@ -41,8 +41,8 @@ const userResolver = {
                 id: user._id,
                 username: user.username,
                 role: user.role,
-                questions: user.questions,
-                answers: user.answers,
+                totalQuestions: user.questions.length,
+                totalAnswers: user.answers.length,
                 createdAt: user.createdAt,
                 recentQuestions,
                 recentAnswers

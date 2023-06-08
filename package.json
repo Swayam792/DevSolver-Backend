@@ -16,8 +16,7 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
-  "dependencies": {
-    "node": "18.13.0",
+  "dependencies": { 
     "@apollo/server": "^4.7.1",
     "@graphql-tools/schema": "^10.0.0",
     "bcrypt": "^5.1.0",

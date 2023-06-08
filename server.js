@@ -7,7 +7,7 @@ import allResolvers from "./graphql/resolvers/allResolvers.js";
 import pkg from 'lodash';
 const { merge } = pkg;
 
-const PORT = process.env.PORT | 4000;
+const PORT = process.env.PORT || 4000;
 
 connectDB();
 

@@ -14,7 +14,7 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-const PORT = process.env.PORT | 4000;
+const PORT = process.env.PORT || 4000;
 
 connectDB();
 

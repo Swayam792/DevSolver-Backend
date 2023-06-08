@@ -50,6 +50,7 @@ const typeDefs = `#graphql
         role: RoleType! 
         questions: [QuestionRep]!
         answers: [AnswerRep]!
+        reputation: Int!
         createdAt: DateTime! 
         recentQuestions: [RecentActivity]!
         recentAnswers: [RecentActivity]!
@@ -58,8 +59,8 @@ const typeDefs = `#graphql
    }
 
    type Author {
-          id: ID!
-          username: String!
+       id: ID!
+       username: String!
    }
 
    type Comment {
@@ -137,12 +138,34 @@ const typeDefs = `#graphql
      count: Int!
    }
 
+   type Message {
+       id: ID!
+       content: String!
+       sender: Author!
+       receiver: Author!
+       createdAt: DateTime!
+   }
+
+   type SuccessMessage {
+        success: Int!
+        message: String!
+   }
+
+   type UnseenMessage{ 
+        id: ID!
+        sender: String! 
+        count: Int!
+   }
+
    type Query {
       getUser(username: String!): User!
       getAllUsers: [UserList]!
       getAllTags: [Tag]!
       getQuestions(sortBy: SortByType!, page: Int!, limit: Int!, filterByTag: String, filterBySearch: String): PaginatedQuestionList!
       viewQuestion(quesId: ID!): Question
+      getMessages(userId: String!): [Message]!
+      getAllMessages: [Message]!
+      getUnseenMessageCount: [UnseenMessage]!
    }
 
    type Mutation {
@@ -167,6 +190,14 @@ const typeDefs = `#graphql
        addAnsComment(quesId: ID!, ansId: ID!, body: String!): [Comment!]!
        deleteAnsComment(quesId: ID!, ansId: ID!, commentId: ID!): ID!
        editAnsComment(quesId: ID!, ansId: ID!, commentId: ID!, body: String!): [Comment!]!
+
+       sendMessage(content: String!, receiver: String!): Message!
+       markSeenMessage(sender: String!): SuccessMessage!
+   }
+
+   type Subscription {
+       newMessage: Message
+       wholeNewMessage: Author!
    }
 `;
 

@@ -60,8 +60,9 @@ const answerResolver = {
                 user.role !== 'ADMIN') {
                 throw new GraphQLError('You are not authorized to do this action.');
               }
-      
+              user.answers = user.answers.filter((a) => a.ansId.toString() !== ansId);
               question.answers = question.answers.filter((a) => a._id.toString() !== ansId);
+              await user.save();
               await question.save();
               return ansId;
             } catch (err) {

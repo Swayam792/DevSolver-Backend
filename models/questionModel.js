@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import CommentModel from "./commentModel.js"; 
+import CommentModel from "./commentModel.js";
 import AnswerModel from "./answerModel.js";
 
 export const questionSchema = new mongoose.Schema({
@@ -56,10 +56,16 @@ export const questionSchema = new mongoose.Schema({
     acceptedAnswer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Answer'
-    }    
+    }
 },
-  {timestamps: true}
-);
+{ timestamps: true }
+); 
+
+questionSchema.index({ title: 'text' });
+ 
+questionSchema.index({ body: 1 });
+
+questionSchema.index({ tags: 1 });
 
 const QuestionModel = mongoose.model('Question', questionSchema);
 export default QuestionModel;
